@@ -4,129 +4,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stink | Official Band Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Frutiger Aero Style</title>
     <style>
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background-color: #0d0d0d;
-            color: #f1f1f1;
-        }
-        header {
-            background: linear-gradient(90deg, #2c3e50, #4ca1af);
-            padding: 60px 20px;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 4em;
-            margin: 0;
-            letter-spacing: 2px;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            background: #1c1c1c;
-            padding: 15px 0;
-        }
-        nav a {
-            color: #f1f1f1;
-            margin: 0 20px;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-        nav a:hover {
-            color: #4ca1af;
-        }
-        .section {
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
-        .section h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        .tour-dates ul {
-            list-style: none;
             padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to bottom, #a3d9ff, #e6faff);
+            overflow-x: hidden;
+            position: relative;
+            color: #333;
         }
-        .tour-dates li {
-            background: #1c1c1c;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 5px;
-        }
-        .contact-form button {
-            padding: 10px 20px;
-            background: #4ca1af;
-            border: none;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .contact-form button:hover {
-            background: #357e96;
-        }
-        footer {
-            background: #1c1c1c;
-            text-align: center;
+
+        header {
+            background: linear-gradient(to bottom, #4fc3f7, #81d4fa);
             padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(to bottom, #7be495, #47c87a);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(to bottom, #47c87a, #379e5f);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            background: linear-gradient(to bottom, #c8f4ff, #a3d9ff);
+            padding: 10px;
+            text-align: center;
             font-size: 0.9em;
-            color: #aaa;
+            color: #555;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 2;
+        }
+
+        /* Bubbels */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.5);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .bubble:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            top: 50%;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            left: 70%;
+            top: 30%;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 40%;
+            top: 70%;
+            animation-delay: 5s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            left: 80%;
+            top: 80%;
+            animation-delay: 7s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+        }
+
+        /* Simple icon */
+        .icon {
+            width: 60px;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Bubbels -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
     <header>
-        <h1>STINK</h1>
-        <p>Official Band Website</p>
+        <h1>Welcome to Frutiger Aero World</h1>
     </header>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#tour">Tour</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-    <section id="about" class="section">
-        <h2>About Stink</h2>
-        <p>Stink is a genre-bending powerhouse band known for electrifying live shows and raw, authentic sound. From gritty riffs to melodic anthems, we create music that makes you move. Join us on the journey!</p>
-    </section>
-
-    <section id="tour" class="section tour-dates">
-        <h2>Upcoming Tour Dates</h2>
-        <ul>
-            <li>April 12, 2025 - The Echo, Los Angeles, CA</li>
-            <li>April 20, 2025 - The Fillmore, San Francisco, CA</li>
-            <li>May 3, 2025 - Metro, Chicago, IL</li>
-            <li>May 15, 2025 - Bowery Ballroom, New York, NY</li>
-        </ul>
-    </section>
-
-    <section id="contact" class="section">
-        <h2>Contact Us</h2>
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+    <div class="content">
+        <p>This is a sample page inspired by that early 2000s glassy, glossy look.</p>
+        <a href="#" class="button">Shiny Button</a>
+        <br>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Crystal_Clear_action_info.png" alt="icon" class="icon">
+    </div>
 
     <footer>
-        &copy; 2025 STINK. All rights reserved.
+        © 2025 Frutiger Aero Theme
     </footer>
+
 </body>
 
 </html>
