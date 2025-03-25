@@ -3,58 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play DOOM in Browser</title>
-    <script src="https://js-dos.com/cdn/js-dos.js"></script>
+    <title>Flappy Bird Clone</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            background-color: #111;
-            color: white;
             text-align: center;
             font-family: Arial, sans-serif;
+            background-color: skyblue;
         }
-        .container {
-            margin-top: 20px;
-        }
-        #dosbox {
-            width: 80%;
-            max-width: 800px;
+        canvas {
+            background: url('https://i.imgur.com/rfOdjli.png'); /* Sky background */
+            display: block;
             margin: auto;
-            border: 5px solid white;
-        }
-        .button {
-            background: red;
-            color: white;
-            padding: 10px 20px;
-            font-size: 20px;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .button:hover {
-            background: darkred;
+            border: 2px solid black;
         }
     </style>
 </head>
 <body>
-
-    <h1>Play DOOM in Your Browser</h1>
-    <p>Click the button below to start DOOM!</p>
-    
-    <div class="container">
-        <button class="button" onclick="startDoom()">Start DOOM</button>
-        <div id="dosbox" style="width: 640px; height: 400px;"></div>
-    </div>
+    <h1>Flappy Bird Clone</h1>
+    <canvas id="gameCanvas" width="320" height="480"></canvas>
+    <p>Press SPACE to jump!</p>
 
     <script>
-        function startDoom() {
-            let dosbox = new Dosbox({
-                id: "dosbox",
-                onload: function (dosbox) {
-                    dosbox.run("https://js-dos.com/cdn/wad/doom.shareware.zip", "/doom.exe");
-                }
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Bird settings
+        let bird = { x: 50, y: 150, radius: 15, velocity: 0, gravity: 0.6, jump: -10 };
+
+        // Pipe settings
+        let pipes = [];
+        let pipeWidth = 50;
+        let pipeGap = 120;
+        let pipeSpeed = 2;
+
+        let score = 0;
+        let gameOver = false;
+
+        function drawBird() {
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(bird.x, bird.y, bird.radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawPipes() {
+            ctx.fillStyle = "green";
+            pipes.forEach(pipe => {
+                ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
+                ctx.fillRect(pipe.x, pipe.top + pipeGap, pipeWidth, canvas.height - pipe.top - pipeGap);
             });
         }
-    </script>
 
+        function drawScore() {
+            ctx.fillStyle = "black";
+            ctx.font = "20px Arial";
+            ctx.fillText("Score: " + score, 10, 30);
+        }
+
+        function update() {
+            if (gameOver) return;
+
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+
+            // Pipe movement
+            pipes.forEach(pipe => {
+                pipe.x -= pipeSpeed;
+
+                // Check collision
+                if (
+                    bird.x + bird.radius > pipe.x &&
+                    bird.x - bird.radius < pipe.x + pipeWidth &&
+                    (bird.y - bird.radius < pipe.top || bird.y + bird.radius > pipe.top + pipeGap)
+                ) {
+                    gameOver = true;
+                }
+
+                // Score update
+                if (pipe.x + pipeWidth < bird.x && !pipe.passed) {
+                    score++;
+                    pipe.passed = true;
+                }
+            });
+
+            // Add new pipes
+            if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 150) {
+                let topHeight = Math.random() * (canvas.height - pipeGap - 100) + 50;
+                pipes.push({ x: canvas.width, top: topHeight, passed: false });
+            }
+
+            // Remove off-screen pipes
+            pipes = pipes.filter(pipe => pipe.x + pipeWidth > 0);
+
+            // Check ground collision
+            if (bird.y + bird.radius > canvas.height) {
+                gameOver = true;
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBird();
+            drawPipes();
+            drawScore();
+        }
+
+        function loop() {
+            update();
+            draw();
+            if (!gameOver) requestAnimationFrame(loop);
+            else alert("Game Over! Score: " + score);
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.code === "Space") {
+                bird.velocity = bird.jump;
+            }
+        });
+
+        loop();
+    </script>
 </body>
 </html>
