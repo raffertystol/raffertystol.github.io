@@ -1,160 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frutiger Aero Style</title>
+    <title>Play DOOM in Browser</title>
+    <script src="https://js-dos.com/cdn/js-dos.js"></script>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(to bottom, #a3d9ff, #e6faff);
-            overflow-x: hidden;
-            position: relative;
-            color: #333;
-        }
-
-        header {
-            background: linear-gradient(to bottom, #4fc3f7, #81d4fa);
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 2;
-        }
-
-        header h1 {
-            margin: 0;
-            color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .content {
-            padding: 60px 40px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: linear-gradient(to bottom, #7be495, #47c87a);
+            background-color: #111;
             color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .button:hover {
-            background: linear-gradient(to bottom, #47c87a, #379e5f);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        footer {
-            background: linear-gradient(to bottom, #c8f4ff, #a3d9ff);
-            padding: 10px;
             text-align: center;
-            font-size: 0.9em;
-            color: #555;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            z-index: 2;
+            font-family: Arial, sans-serif;
         }
-
-        /* Bubbels */
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.5);
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .bubble:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            left: 10%;
-            top: 50%;
-            animation-delay: 0s;
-        }
-
-        .bubble:nth-child(2) {
-            width: 50px;
-            height: 50px;
-            left: 70%;
-            top: 30%;
-            animation-delay: 3s;
-        }
-
-        .bubble:nth-child(3) {
-            width: 100px;
-            height: 100px;
-            left: 40%;
-            top: 70%;
-            animation-delay: 5s;
-        }
-
-        .bubble:nth-child(4) {
-            width: 60px;
-            height: 60px;
-            left: 80%;
-            top: 80%;
-            animation-delay: 7s;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(-20px) scale(1.05);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(0) scale(1);
-                opacity: 0.6;
-            }
-        }
-
-        /* Simple icon */
-        .icon {
-            width: 60px;
+        .container {
             margin-top: 20px;
+        }
+        #dosbox {
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+            border: 5px solid white;
+        }
+        .button {
+            background: red;
+            color: white;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background: darkred;
         }
     </style>
 </head>
-
 <body>
 
-    <!-- Bubbels -->
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-
-    <header>
-        <h1>Welcome to Frutiger Aero World</h1>
-    </header>
-
-    <div class="content">
-        <p>This is a sample page inspired by that early 2000s glassy, glossy look.</p>
-        <a href="#" class="button">Shiny Button</a>
-        <br>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Crystal_Clear_action_info.png" alt="icon" class="icon">
+    <h1>Play DOOM in Your Browser</h1>
+    <p>Click the button below to start DOOM!</p>
+    
+    <div class="container">
+        <button class="button" onclick="startDoom()">Start DOOM</button>
+        <div id="dosbox" style="width: 640px; height: 400px;"></div>
     </div>
 
-    <footer>
-        © 2025 Frutiger Aero Theme
-    </footer>
+    <script>
+        function startDoom() {
+            let dosbox = new Dosbox({
+                id: "dosbox",
+                onload: function (dosbox) {
+                    dosbox.run("https://js-dos.com/cdn/wad/doom.shareware.zip", "/doom.exe");
+                }
+            });
+        }
+    </script>
 
 </body>
-
 </html>
